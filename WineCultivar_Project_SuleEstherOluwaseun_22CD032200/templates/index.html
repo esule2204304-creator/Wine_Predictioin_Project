@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wine Cultivar Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="card">
+    <h1>Wine Cultivar Origin Prediction</h1>
+    <p class="sub">Enter the 6 chemical properties and predict the cultivar (1, 2, or 3).</p>
+
+    {% if error %}
+      <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    {% if prediction %}
+      <div class="alert success">Prediction: <strong>{{ prediction }}</strong></div>
+    {% endif %}
+
+    <form method="POST" action="/predict">
+      <div class="grid">
+        {% for feat in features %}
+          <div class="field">
+            <label for="{{ feat }}">{{ feat }}</label>
+            <input
+              id="{{ feat }}"
+              name="{{ feat }}"
+              type="number"
+              step="any"
+              required
+              placeholder="Enter {{ feat }}"
+            />
+          </div>
+        {% endfor %}
+      </div>
+
+      <button type="submit">Predict Cultivar</button>
+    </form>
+
+    <p class="note">
+      Model uses scaling + logistic regression. Feature order is locked to avoid wrong predictions.
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "features": [
+    "alcohol",
+    "malic_acid",
+    "alcalinity_of_ash",
+    "total_phenols",
+    "flavanoids",
+    "proline"
+  ]
+}
